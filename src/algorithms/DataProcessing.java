@@ -17,5 +17,11 @@ import java.util.StringTokenizer;
 import acm.program.*;
 
 public class DataProcessing extends ConsoleProgram {
-
+	
+	/* Class Variables */
+	StockData firstStock;
+	StockData secondStock;
+	
+	
+	
 }
