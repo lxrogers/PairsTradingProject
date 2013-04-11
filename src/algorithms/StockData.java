@@ -24,7 +24,7 @@ public class StockData {
 	private String fullName;
 	
 	// Allows us to set the prices.
-	public void setArr(int[] inputPrices) {
+	public void setPrices(int[] inputPrices) {
 		this.prices = inputPrices;
 	}
 	
