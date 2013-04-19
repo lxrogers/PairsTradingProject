@@ -13,43 +13,42 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
-import acm.program.*;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
 
-public class DataProcessing extends ConsoleProgram {
-	
+public class DataProcessing  {
+
 	/* Class Variables */
-	StockData firstStock;
-	StockData secondStock;
-	int numberOfDays = 135;
-	
-	/* Runs our program */
-	public void run() {
-		readInData("dataSets/Coca-Cola NYSE.csv", "dataSets/Pepsico NYSE.csv");
+
+	static public String getXMostRecentDaysDataURL(String ticker, int days) {
+		Calendar now = Calendar.getInstance();
+		Calendar before = Calendar.getInstance();
+
+		before.add(Calendar.DAY_OF_YEAR, days * -1);  
+		//http://ichart.finance.yahoo.com/table.csv?s=PEP&a=08&b=26&c=2012&d=03&e=11&f=2013&g=d&ignore=.csv
+		String url = "http://ichart.finance.yahoo.com/table.csv?s=" + ticker + "&a=" +
+				before.get(Calendar.MONTH) + "&b=" + before.get(Calendar.DAY_OF_MONTH) + "&c=" + before.get(Calendar.YEAR) + "&d=" +
+				now.get(Calendar.MONTH) + "&e=" + now.get(Calendar.DAY_OF_MONTH) + "&f=" + now.get(Calendar.YEAR)+ "&g=ignore=.csv";
+
+
+		return url;
 	}
-	
-	/* Reads the data in using the specified filenames */
-	public void readInData(String FirstDataFile, String SecondDataFile) {
-		processFile(FirstDataFile, 1);
-		processFile(SecondDataFile, 2);
-	}
-	
-	/* Read the data into each of the respective StockData structures */
-	public void processFile(String fileName, int stockNumber) {
-		try {			
-			BufferedReader br = new BufferedReader(new FileReader(fileName));
-			br.readLine(); // Get rid of the first line which is just a header.
-			for(int i = 0; i < numberOfDays; i++) {
-				String currentLine = br.readLine();
-				int start = currentLine.indexOf(',') + 1;
-				int dailyPrice = Integer.parseInt(currentLine.substring(start));
-			}
-		} catch (FileNotFoundException FNF) {
-			FNF.printStackTrace();
-		} catch (IOException IOE) {
-			IOE.printStackTrace();
+	static public ArrayList<String> getXMostRecentDaysData(String ticker, int days) {
+		ArrayList<String> dataLines = new ArrayList<String>();
+		try {
+			String url = getXMostRecentDaysDataURL(ticker, days);
+			URL oracle = new URL(url);
+			BufferedReader in = new BufferedReader(	new InputStreamReader(oracle.openStream()));
+			String inputLine;
+			while ((inputLine = in.readLine()) != null)
+				dataLines.add(inputLine);
+			in.close();
 		}
-		
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return dataLines;
 	}
-	
 }
