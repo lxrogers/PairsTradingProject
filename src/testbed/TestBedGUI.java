@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+import algorithms.DataProcessing;
 import algorithms.StockData;
 
 public class TestBedGUI extends JFrame implements ActionListener{
@@ -44,10 +45,8 @@ public class TestBedGUI extends JFrame implements ActionListener{
 		retrievePrices.addActionListener(this);
 		fileMenu.add(retrievePrices);
 		
-		
 		dfTest = new JMenuItem("Dickey Fuller");
 		dfTest.addActionListener(this);
-		dfTest.setEnabled(false);
 		testMenu.add(dfTest);
 		
 		
@@ -58,19 +57,15 @@ public class TestBedGUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == retrievePrices) {
-			int days = Integer.parseInt(JOptionPane.showInputDialog(null, "Number of Days:"));
-			String s1 = JOptionPane.showInputDialog(null, "Ticker 1:");
-			testSecurity1 = StockData.readInData(days, s1);
-			String s2 = JOptionPane.showInputDialog(null, "Ticker 2:");
-			testSecurity2 = StockData.readInData(days, s2);
-			console.append(testSecurity1.getStockSymbol() + ": " + testSecurity1.getPricesString());
-			console.append("\n");
-			console.append(testSecurity2.getStockSymbol() + ": " + testSecurity2.getPricesString());
-			dfTest.setEnabled(true);
+			
 		}
 		else if (e.getSource() == dfTest) {
-			console.append("\nperforming dickey fuller test");
-			StockData.runDickeyFuller(testSecurity1, testSecurity2);
+			String t1 = JOptionPane.showInputDialog(null, "Ticker 1:");
+			String t2 = JOptionPane.showInputDialog(null, "Ticker 2:");
+			int days = Integer.parseInt(JOptionPane.showInputDialog(null, "Number of Days:"));
+			console.append("Running Dickey Fuller...\n");
+			double p = StockData.runDickeyFuller(t1,t2, DataProcessing.getStartDateString(135), DataProcessing.getNowDateString());
+			console.append("p = " + p + "\n");
 		}
 	}
 	public static void main(String[] args) {

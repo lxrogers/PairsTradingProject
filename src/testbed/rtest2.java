@@ -72,19 +72,33 @@ class TextConsole2 implements RMainLoopCallbacks
 
 public class rtest2 {
     public static void main(String[] args) {
-        System.out.println("Press <Enter> to continue (time to attach the debugger if necessary)");
-        try { System.in.read(); } catch(Exception e) {};
-        System.out.println("Creating Rengine (with arguments)");
-		Rengine re=new Rengine(args, true, new TextConsole2());
-        System.out.println("Rengine created, waiting for R");
-        if (!re.waitForR()) {
-            System.out.println("Cannot load R");
+//        System.out.println("Press <Enter> to continue (time to attach the debugger if necessary)");
+//        try { System.in.read(); } catch(Exception e) {};
+//        System.out.println("Creating Rengine (with arguments)");
+//		Rengine re=new Rengine(args, true, new TextConsole2());
+//        System.out.println("Rengine created, waiting for R");
+//        if (!re.waitForR()) {
+//            System.out.println("Cannot load R");
+//            return;
+//        }
+//		System.out.println("re-routing stdout/err into R console");
+//		System.setOut(new PrintStream(new RConsoleOutputStream(re, 0)));
+//		System.setErr(new PrintStream(new RConsoleOutputStream(re, 1)));
+//		
+//		//System.out.println("Letting go; use main loop from now on");
+//		System.out.println("5/4\n");
+    	 // new R-engine
+        Rengine re=new Rengine (new String [] {"--vanilla"}, false, null);
+        if (!re.waitForR())
+        {
+            System.out.println ("Cannot load R");
             return;
         }
-		System.out.println("re-routing stdout/err into R console");
-		System.setOut(new PrintStream(new RConsoleOutputStream(re, 0)));
-		System.setErr(new PrintStream(new RConsoleOutputStream(re, 1)));
-		
-		System.out.println("Letting go; use main loop from now on");
+        
+        // print a random number from uniform distribution
+        System.out.println (re.eval ("3/4").asDouble ());
+        
+        // done...
+        re.end();
     }
 }
