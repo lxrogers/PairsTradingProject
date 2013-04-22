@@ -81,7 +81,7 @@ public class StockData {
         {
             System.out.println ("Cannot load R");
             return new Double(0);
-        }  
+        }
 
         re.eval("library(quantmod)");
         re.eval("library(tseries)");
