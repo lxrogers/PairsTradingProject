@@ -4,11 +4,8 @@
  * This file is what we run to actually make trades using
  * the data we've generated.
  */
-
-/* Package Designation */
 package algorithms;
 
-/* Imports */
 public class TradeAlgos {
 	/*
 	 * Function: callTrades
@@ -66,16 +63,16 @@ public class TradeAlgos {
 		// Calculate OU for storage purposes.
 		double OUValue = calculateOU(stockName);
 
-		if(tradeType,equals("short")) {
+		if(tradeType.equals("short")) {
 			// The below line will be an API call in the future.
 			PlaceShortOrder(stockName, amount);
-			TradeOrder short = new TradeOrder(stockName, "short", percentage, OUValue);
-			tradeList.add(short);
+			TradeOrder shortOrder = new TradeOrder(stockName, "short", percentage, OUValue);
+			tradeList.add(shortOrder);
 		} else if(tradeType.equals("long")) {
 			// The below line will be an API call in the future.
 			PlaceLongOrder(stockName, amount);
-			TradeOrder long = new TradeOrder(stockName, "long", percentage, OUValue);
-			tradeList.add(long);
+			TradeOrder longOrder = new TradeOrder(stockName, "long", percentage, OUValue);
+			tradeList.add(longOrder);
 		}
 
 	}
