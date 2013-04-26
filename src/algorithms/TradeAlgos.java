@@ -22,7 +22,6 @@ public class TradeAlgos {
 	 * Essentially the main function
 	 * that calls all others.
 	 */
-	
 	public static void evaluateAndInitiateTrades(String ticker1, String ticker2) {
 		
 		// Calculate ratios and standard deviation.
@@ -34,7 +33,7 @@ public class TradeAlgos {
 		// Running the algorithm if we're a standard deviation diverged.
 		if(absoluteRatioDifference >= historicalStdDev) {
 			
-			// If we want to short stock A.
+			// If we want to short stock A, because A is over-performing relative to B.
 			if(currentRatio > historicalRatio) {
 				// Get some of the data we need for the following process.
 				double currentOverHistRatio = currentRatio / historicalRatio;
@@ -56,7 +55,7 @@ public class TradeAlgos {
 				executeAndRecordTrade(ticker2, "long", shortA.percentage - oldPercentage);				
 			}
 
-			// If we want to long stock A.
+			// If we want to long stock A, because A is under-performing relative to B.
 			if(currentRatio < historicalRatio) {
 				// Get some of the data we need for the following process.
 				double currentOverHistRatio = currentRatio / historicalRatio;
@@ -76,21 +75,30 @@ public class TradeAlgos {
 				// Make the trades, investing the same amount in each stock!
 				executeAndRecordTrade(ticker1, "long", longA.percentage - oldPercentage);
 				executeAndRecordTrade(ticker2, "short", longA.percentage - oldPercentage);		
-				
-				
-				
 			}
-		}		
+			
+		}	
+		
 	}
 	
 	/*
 	 * Function: analyzePositions
 	 * --------------------------
-	 * 
+	 * Called daily. Look at the Ornstein-Uhlenbeck expected values,
+	 * update the amount of time that has passed so far.
+	 * --------------------------
+	 * Unwind a short-long position under two circumstances:
+	 * 1. We've reverted to within x of the mean.
+	 * 2. The OU expected value has been reached.
 	 */
 	public static void analyzePositions(String ticker1, String ticker2) {
 		
+		// Get historical ratio.
+		// Get the ratio today.
 		
+		// If we're within 1/2 of a standard deviation of the mean, divest.
+		// Get the Ornstein-Uhlenbeck value, then OU--.
+		// If the O-U value is zero, divest.
 		
 	}
 	
