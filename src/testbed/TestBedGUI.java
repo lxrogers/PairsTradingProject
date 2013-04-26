@@ -14,11 +14,12 @@ import javax.swing.JTextArea;
 
 import algorithms.DataProcessing;
 import algorithms.StockData;
+import database.DBConnection;
 
 public class TestBedGUI extends JFrame implements ActionListener{
 	JMenu fileMenu, testMenu;
 	JMenuBar menuBar;
-	JMenuItem retrievePrices, dfTest;
+	JMenuItem getUser, dfTest;
 	StockData testSecurity1;
 	StockData testSecurity2;
 	JTextArea console;
@@ -41,9 +42,9 @@ public class TestBedGUI extends JFrame implements ActionListener{
 		menuBar.add(fileMenu);
 		menuBar.add(testMenu);
 		
-		retrievePrices = new JMenuItem("Retrieve Prices");
-		retrievePrices.addActionListener(this);
-		fileMenu.add(retrievePrices);
+		getUser = new JMenuItem("Retrieve Prices");
+		getUser.addActionListener(this);
+		fileMenu.add(getUser);
 		
 		dfTest = new JMenuItem("Dickey Fuller");
 		dfTest.addActionListener(this);
@@ -56,7 +57,10 @@ public class TestBedGUI extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == retrievePrices) {
+		if (e.getSource() == getUser) {
+			System.out.println("getting user");
+			DBConnection db = new DBConnection();
+		
 			
 		}
 		else if (e.getSource() == dfTest) {
@@ -64,8 +68,8 @@ public class TestBedGUI extends JFrame implements ActionListener{
 			String t2 = JOptionPane.showInputDialog(null, "Ticker 2:");
 			int days = Integer.parseInt(JOptionPane.showInputDialog(null, "Number of Days:"));
 			console.append("Running Dickey Fuller...\n");
-			double p = StockData.runDickeyFuller(t1,t2, DataProcessing.getStartDateString(135), DataProcessing.getNowDateString());
-			console.append("p = " + p + "\n");
+			//double p = StockData.runDickeyFuller();
+			console.append("p = \n");
 		}
 	}
 	public static void main(String[] args) {

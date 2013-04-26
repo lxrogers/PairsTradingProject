@@ -71,30 +71,6 @@ public class StockData {
 		return s;
 	}
 	
-	/*
-	 * @param ratios: an arraylist of stock ratios
-	 * returns a double array, Double[0] is the p value, Double[1] is the dickey fuller value
-	 */
-	public static Double runDickeyFuller(String t1, String t2, String start, String end) {
-		Rengine re=new Rengine (new String [] {"--vanilla"}, false, null);
-        if (!re.waitForR())
-        {
-            System.out.println ("Cannot load R");
-            return new Double(0);
-        }
-
-        re.eval("library(quantmod)");
-        re.eval("library(tseries)");
-        re.eval("stock1 = getSymbols('" + t1 + "', src='yahoo', from= '" + start + "', to ='" + end + "', auto.assign=FALSE)");
-        re.eval("stock2=getSymbols('" + t2 + "', src='yahoo', from= '"+ start+ "', to = '" + end + "', auto.assign=FALSE)");
-        re.eval("ratio=stock1[,1] / stock2[,1]");
-        RVector results = ((RVector) (re.eval("adf.test(ratio)").getContent()));
-        Double ans = results.at(3).asDouble();
-        re.end();
-        
-        return ans;
-	}
-	
 	public static ArrayList<Double> calculateRatios(StockData s1, StockData s2) {
 		ArrayList<Double> ratios= new ArrayList<Double>();
 		for (int i = 0; i < s1.getPrices().size(); i++) {

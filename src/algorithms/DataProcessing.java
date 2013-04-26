@@ -36,7 +36,6 @@ public class DataProcessing  {
 		return url;
 	}
 	static public String getStartDateString(int days) {
-		Calendar now = Calendar.getInstance();
 		Calendar before = Calendar.getInstance();
 		before.add(Calendar.DAY_OF_YEAR, days * -1);
 		return "" + before.get(Calendar.YEAR) + "-" + before.get(Calendar.MONTH) + "-" + before.get(Calendar.DATE);
