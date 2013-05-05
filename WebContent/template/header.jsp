@@ -53,7 +53,7 @@
 				<li><a href="teamstocks.jsp">Our Stock Pairs</a></li>
 			</ul>
 			<ul>
-				<li><a href="results.html">Results</a></li>
+				<li><a href="simulation.jsp">Simulation</a></li>
 				<li><a href="BatchServlet">Batch</a></li>
 			</ul>
 		</nav>

@@ -38,11 +38,11 @@ public class DataProcessing  {
 	static public String getStartDateString(int days) {
 		Calendar before = Calendar.getInstance();
 		before.add(Calendar.DAY_OF_YEAR, days * -1);
-		return "" + before.get(Calendar.YEAR) + "-" + before.get(Calendar.MONTH) + "-" + before.get(Calendar.DATE);
+		return "" + before.get(Calendar.YEAR) + "-" + (before.get(Calendar.MONTH) + 1) + "-" + before.get(Calendar.DATE);
 	}
 	static public String getNowDateString() {
 		Calendar now = Calendar.getInstance();
-		return "" + now.get(Calendar.YEAR) + "-" + now.get(Calendar.MONTH) + "-" + now.get(Calendar.DATE);
+		return "" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DATE);
 	}
 	static public ArrayList<String> getXMostRecentDaysData(String ticker, int days) {
 		ArrayList<String> dataLines = new ArrayList<String>();

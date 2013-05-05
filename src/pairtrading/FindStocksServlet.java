@@ -42,7 +42,12 @@ public class FindStocksServlet extends HttpServlet {
 		String a = request.getParameter("act");
 		ArrayList<MStockPair> pairs = new ArrayList<MStockPair>();
 		if (a.equals("Common Pairs")) {
+
 			pairs.add(new MStockPair("KO", "PEP", 1));
+			pairs.add(new MStockPair("SPY", "DIA", 1));
+			pairs.add(new MStockPair("USO", "OIL", 1));
+			pairs.add(new MStockPair("XLF", "XLU", 1));
+			pairs.add(new MStockPair("DIA", "TLT", 1));
 		}
 		else if (a.equals("Test Permutations")) {
 			double pthreshold = Double.parseDouble(request.getParameter("threshold"));

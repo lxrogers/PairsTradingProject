@@ -68,10 +68,12 @@ public class MStockPair {
 		String t2 = mStockB.getTicker();
         re.eval("stock1 = getSymbols('" + t1 + "', src='yahoo', from= '" + start + "', to ='" + end + "', auto.assign=FALSE)");
         re.eval("stock2 = getSymbols('" + t2 + "', src='yahoo', from= '"+ start+ "', to = '" + end + "', auto.assign=FALSE)");
+        
         re.eval("ratio=stock1[,1] / stock2[,1]");
-        RVector results = ((RVector) (re.eval("adf.test(ratio)").getContent()));
+        RVector results = ((RVector) (re.eval("adf.test(unclass(ratio))").getContent()));
         Double ans = results.at(3).asDouble();
         re.end();
+        
         
         return ans;
 	}
@@ -82,7 +84,6 @@ public class MStockPair {
 		 re.eval("prices=stock1[,1]");
 		REXP x = (re.eval("prices"));
 		double[] ans = x.asDoubleArray();
-		System.out.println(re.eval("stock1"));
 		return ans;
 	}
 	public static double[] getHistoricalRatio(String t1, String t2, Rengine re) {
@@ -92,7 +93,6 @@ public class MStockPair {
         re.eval("stock2 = getSymbols('" + t2 + "', src='yahoo', from= '"+ start+ "', to = '" + end + "', auto.assign=FALSE)");
         re.eval("ratio=stock1[,1] / stock2[,1]");
         REXP x = (re.eval("ratio"));
-        System.out.println(re.eval("ratio"));
         double[] ans = x.asDoubleArray();
         re.end();
         return ans;
