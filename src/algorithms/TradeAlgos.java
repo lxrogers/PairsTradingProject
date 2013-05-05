@@ -30,8 +30,8 @@ public class TradeAlgos {
 		double currentRatio = RCalls.getCurrentRatio(); // Call R.
 		double absoluteRatioDifference = Math.abs(historicalRatio - currentRatio);
 		
-		// Running the algorithm if we're a standard deviation diverged.
-		if(absoluteRatioDifference >= historicalStdDev) {
+		// Running the algorithm if we're a standard deviation diverged. We've also added safeguards.
+		if(absoluteRatioDifference > historicalStdDev && absoluteRatioDifference <= 3*historicalStdDev) {
 			
 			// If we want to short stock A, because A is over-performing relative to B.
 			if(currentRatio > historicalRatio) {
@@ -96,6 +96,7 @@ public class TradeAlgos {
 		// Get historical ratio.
 		// Get the ratio today.
 		
+		// Firstly, unwind if the ratio is >= 3*historicalStdDev.
 		// If we're within 1/2 of a standard deviation of the mean, divest.
 		// Get the Ornstein-Uhlenbeck value, then OU--.
 		// If the O-U value is zero, divest.
