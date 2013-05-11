@@ -31,7 +31,6 @@ public class BatchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("hello");
 		DBConnection db = (DBConnection) request.getServletContext().getAttribute("database");
 		Rengine re = (Rengine)request.getServletContext().getAttribute("rengine");
 		StockPairUtils.batchPValues(db, re);

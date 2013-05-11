@@ -9,25 +9,30 @@
 package algorithms;
 
 /* Imports */
-import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.rosuda.JRI.Rengine;
+
+import pairtrading.TradePair;
 
 public class TradeAlgos {
 	
 	static TradeOrder shortA = new TradeOrder("none", "none", 0.0, 0);
 	static TradeOrder longA = new TradeOrder("none", "none", 0.0, 0);
 	
-	/*
-	 * Function: callTrades
-	 * -----------------------
-	 * Essentially the main function
-	 * that calls all others.
+	/**
+	 * 
+	 * @param ticker1 first stock
+	 * @param ticker2 second stock
+	 * @param re instance of REngine. Must have libraries loaded
+	 * @return the trade if one was determined, null if no trade
 	 */
-	public static void evaluateAndInitiateTrades(String ticker1, String ticker2) {
+	public static TradePair evaluateAndInitiateTrades(String ticker1, String ticker2, Calendar day,  Rengine re) {
 		
 		// Calculate ratios and standard deviation.
-		double historicalRatio = RCalls.getRatio(); // Call R.
-		double historicalStdDev = RCalls.getStdDev(); // Call R.
-		double currentRatio = RCalls.getCurrentRatio(); // Call R.
+		double historicalRatio = RCalls.getRatio(re); // Call R.
+		double historicalStdDev = RCalls.getStdDev(re); // Call R.
+		double currentRatio = RCalls.getCurrentRatio(re); // Call R.
 		double absoluteRatioDifference = Math.abs(historicalRatio - currentRatio);
 		
 		// Running the algorithm if we're a standard deviation diverged. We've also added safeguards.
@@ -43,13 +48,13 @@ public class TradeAlgos {
 					shortA.ticker = ticker1;
 					shortA.aTradeType = "short";
 					shortA.percentage = 10.0 * currentOverHistRatio;
-					shortA.OUValue = RCalls.calculateOU(ticker1);
+					shortA.OUValue = RCalls.calculateOU(re, ticker1);
 				} else {
 					// If we're not investing more, just leave this function.
-					if(10.0*currentOverHistRatio <= oldPercentage) return;
+					if(10.0*currentOverHistRatio <= oldPercentage) return null;
 					// Set the new percentage if it is more.
 					shortA.percentage = 10.0*currentOverHistRatio;
-				}				
+				}	  			
 				// Make the trades, investing the same amount in each stock!
 				executeAndRecordTrade(ticker1, "short", shortA.percentage - oldPercentage);
 				executeAndRecordTrade(ticker2, "long", shortA.percentage - oldPercentage);				
@@ -65,10 +70,10 @@ public class TradeAlgos {
 					longA.ticker = ticker2;
 					longA.aTradeType = "long";
 					longA.percentage = 10.0 * currentOverHistRatio;
-					longA.OUValue = RCalls.calculateOU(ticker2);
+					longA.OUValue = RCalls.calculateOU(re, ticker2);
 				} else {
 					// If we're not investing more, just leave this function.
-					if(10.0*currentOverHistRatio <= oldPercentage) return;
+					if(10.0*currentOverHistRatio <= oldPercentage) return null;
 					// Set the new percentage if it is more.
 					longA.percentage = 10.0*currentOverHistRatio;
 				}
@@ -78,6 +83,7 @@ public class TradeAlgos {
 			}
 			
 		}	
+		return null;
 		
 	}
 	

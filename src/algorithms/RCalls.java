@@ -6,33 +6,32 @@
 /* Package Designation */
 package algorithms;
 
+import org.rosuda.JRI.Rengine;
+
 /* Imports */
 
 public class RCalls {
 	
-	/*
-	 * As of now the below functions are not yet implemented,
-	 * but in the future they will call R and return those values.
-	 */
-	
-	public static double getRatio() {
+	public static double getRatio(Rengine re) {
 		// Not yet implemented.
 		return 1.0;
 	}
 	
-	public static double getStdDev() {
+	public static double getStdDev(Rengine re) {
 		// Not yet implemented.
 		return 1.0;
 	}
 	
-	public static double getCurrentRatio() {
+	public static double getCurrentRatio(Rengine re) {
 		// Not yet implemented.
 		return 1.0;
 	}
 	
-	public static int calculateOU(String ticker) {
+	public static int calculateOU(Rengine re, String ticker) {
 		// Not yet implemented.
 		return 1;
 	}
-	
+	public static double getPrice(String ticker, String date) {
+		return 0;
+	}
 }

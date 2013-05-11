@@ -40,21 +40,20 @@ public class FindStocksServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBConnection db = (DBConnection) request.getServletContext().getAttribute("database");
 		String a = request.getParameter("act");
+		String i = request.getParameter("pvalueindex");
+		int index = (i == null) ? 0 : Integer.parseInt(i.toString());
+		String pvalueindex = MStockPair.PVALUE_COLUMNS[index];
 		ArrayList<MStockPair> pairs = new ArrayList<MStockPair>();
 		if (a.equals("Common Pairs")) {
 
-			pairs.add(new MStockPair("KO", "PEP", 1));
-			pairs.add(new MStockPair("SPY", "DIA", 1));
-			pairs.add(new MStockPair("USO", "OIL", 1));
-			pairs.add(new MStockPair("XLF", "XLU", 1));
-			pairs.add(new MStockPair("DIA", "TLT", 1));
 		}
 		else if (a.equals("Test Permutations")) {
-			double pthreshold = Double.parseDouble(request.getParameter("threshold"));
+			double pthreshold = Double.parseDouble(request.getParameter("pvalueindex"));
 			String composite_ticker = request.getParameter("composite");
-			pairs = StockPairUtils.getStockPairs(db, composite_ticker, request.getSession().getAttribute("teamID").toString());
+			pairs = StockPairUtils.getStockPairs(db, composite_ticker, request.getSession().getAttribute("teamID").toString(), pvalueindex);
 		}
 		request.setAttribute("results", pairs);
+		request.setAttribute("pvalueindex", i);
 		RequestDispatcher dispatch = request.getRequestDispatcher("findstocks.jsp");
 		dispatch.forward(request, response);
 	}

@@ -299,7 +299,7 @@ header#navtop { clear: both; overflow: hidden; }
     header nav ul { float: left; overflow: hidden; padding: 0 3em 0 2em; border-left: 1px solid #ddd; line-height: 2em; }
 nav a, menu a { text-decoration: none; color: #555; }
 .navactive { color: #0078CF }
-.logo {margin-bottom: 3em;}
+.logo {margin-bottom: 1em;}
 .logo:hover {background: none;}
 		
 		
@@ -322,6 +322,7 @@ footer li { float: left; margin-right: 1em; padding-right: 1em; border-right: 1p
 footer li:last-child { margin-right: 0; padding-right: 0; border-right: none; }
 .up a { display: block; text-align: center; margin: 0 auto; }
 
+bacon li {float: left; margin-right: 1em; padding-right: 1em; border-right: 1px solid #DDD; font-size: 2em;}
 
 /* -- HOME-PAGE
 ------------------------------------------------------------- */

@@ -19,16 +19,14 @@
 					}
 					%>
 				</select><br>
-				P-Value Threshold:<br>
-				<select name="threshold">
-				  <option>.1</option>
-				  <option>.2</option>
-				  <option>.3</option>
-				  <option>.4</option>
-				  <option>.5</option>
-				  <option>.6</option>
-				  <option>.7</option>
-				  <option>.8</option>
+				P-Value Time Frame:<br>
+				<%
+					Object iobj = request.getAttribute("pvalueindex");
+					int index = (iobj == null) ? 0 : Integer.parseInt(iobj.toString());
+				%>
+				<select name="pvalueindex">
+				  <option value='0' <%= (index == 0) ? "selected='selected'" : "" %>>Now</option>
+				  <option value='1' <%= (index == 1) ? "selected='selected'" : ""%>>2012-01-01</option>
 				</select><br>
 			<br><input type="submit" name ="act" value="Test Permutations">&nbsp;&nbsp;&nbsp;<input type="submit" name="act" value="Common Pairs">
 		</form>
@@ -36,11 +34,11 @@
 		<%
 		Object r = request.getAttribute("results");
 		if (r!= null) {
+			//index already defined above
 			ArrayList<MStockPair> pairs = (ArrayList<MStockPair>)r;
 			out.println(MStockPair.getListHTMLHeader());
-			//out.println("<table>");
 			for (int i = 0; i < pairs.size(); i++) {
-				out.println(pairs.get(i).getListHTML());
+				out.println(pairs.get(i).getListHTML(index));
 			}
 			//out.println("</table>");
 			out.println(MStockPair.getListHTMLFooter());

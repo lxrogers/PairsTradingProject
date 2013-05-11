@@ -3,13 +3,17 @@
 <%
 	String t1 = request.getParameter("t1");
 	String t2 = request.getParameter("t2");
+	String d = request.getParameter("d");
+	int date = (d != null) ? Integer.parseInt(d) : 0;
 	Rengine re = (Rengine)(request.getServletContext().getAttribute("rengine"));
+	String rDate = MStockPair.getRDateString(date);
+	
 %>
 <script src="Chart.js"></script>
 <script>
 	var data1 = new Array(<%
 			
-			double[] prices = MStockPair.getHistoricalPrices(t1, re);
+			double[] prices = MStockPair.getHistoricalPrices(t1, re, rDate);
 			for (int i = 0; i < prices.length - 1; i++ ) {
 				out.print(prices[i] + ",");
 			}
@@ -18,7 +22,7 @@
 	
 		var data2 = new Array(<%
 			
-			double[] prices2 = MStockPair.getHistoricalPrices(t2, re);
+			double[] prices2 = MStockPair.getHistoricalPrices(t2, re, rDate);
 			for (int i = 0; i < prices2.length - 1; i++ ) {
 				out.print(prices2[i] + ",");
 			}
