@@ -1,0 +1,172 @@
+ticker,name,compositeTicker
+XOM,Exxon Mobil Corp.,NYE.ID
+CVX,Chevron Corp.,NYE.ID
+BP,BP PLC,NYE.ID
+RDS/A,Royal Dutch Shell PLC Cl A,NYE.ID
+TOT,Total S.A.,NYE.ID
+SLB,Schlumberger Ltd.,NYE.ID
+RDS/B,Royal Dutch Shell PLC B,NYE.ID
+COP,ConocoPhillips,NYE.ID
+OXY,Occidental Petroleum Corp.,NYE.ID
+E,ENI S.p.A.,NYE.ID
+SU,Suncor Energy Inc.,NYE.ID
+PBR,Petroleo Brasileiro S/A,NYE.ID
+APC,Anadarko Petroleum Corp.,NYE.ID
+APA,Apache Corp.,NYE.ID
+CNQ,Canadian Natural Resources Ltd.,NYE.ID
+NOV,National Oilwell Varco Inc.,NYE.ID
+HAL,Halliburton Co.,NYE.ID
+CEO,CNOOC Ltd.,NYE.ID
+PTR,PetroChina Co. Ltd.,NYE.ID
+EOG,EOG Resources Inc.,NYE.ID
+STO,Statoil ASA,NYE.ID
+DVN,Devon Energy Corp.,NYE.ID
+CVE,Cenovus Energy Inc.,NYE.ID
+TRP,TransCanada Corp.,NYE.ID
+ENB,Enbridge Inc.,NYE.ID
+SSL,Sasol Ltd.,NYE.ID
+MRO,Marathon Oil Corp.,NYE.ID
+BHI,Baker Hughes Inc.,NYE.ID
+EP,El Paso Corp.,NYE.ID
+HES,Hess Corp.,NYE.ID
+SNP,China Petroleum & Chemical Corp.,NYE.ID
+NBL,Noble Energy Inc.,NYE.ID
+WMB,Williams Cos.,NYE.ID
+CHK,Chesapeake Energy Corp.,NYE.ID
+RIG,Transocean Ltd.,NYE.ID
+MPC,Marathon Petroleum Corp.,NYE.ID
+TLM,Talisman Energy Inc.,NYE.ID
+ECA,EnCana Corp.,NYE.ID
+PXD,Pioneer Natural Resources Co.,NYE.ID
+VLO,Valero Energy Corp.,NYE.ID
+CAM,Cameron International Corp.,NYE.ID
+ESV,ENSCO PLC,NYE.ID
+SDRL,SeaDrill Ltd.,NYE.ID
+FTI,FMC Technologies Inc.,NYE.ID
+MUR,Murphy Oil Corp.,NYE.ID
+WFT,Weatherford International Ltd.,NYE.ID
+SWN,Southwestern Energy Co.,NYE.ID
+CXO,Concho Resources Inc.,NYE.ID
+EC,Ecopetrol S.A.,NYE.ID
+NXY,Nexen Inc.,NYE.ID
+RRC,Range Resources Corp.,NYE.ID
+NE,Noble Corp.,NYE.ID
+PWE,Penn West Petroleum Ltd.,NYE.ID
+DNR,Denbury Resources Inc.,NYE.ID
+EQT,EQT Corp.,NYE.ID
+COG,Cabot Oil & Gas Corp.,NYE.ID
+XEC,Cimarex Energy Co.,NYE.ID
+WLL,Whiting Petroleum Corp.,NYE.ID
+BTE,Baytex Energy Corp.,NYE.ID
+HFC,HollyFrontier Corp.,NYE.ID
+PXP,Plains Exploration & Production Co.,NYE.ID
+NBR,Nabors Industries Ltd.,NYE.ID
+HP,Helmerich & Payne Inc.,NYE.ID
+QEP,QEP Resources Inc.,NYE.ID
+OII,Oceaneering International Inc.,NYE.ID
+CLB,Core Laboratories N.V.,NYE.ID
+CLR,Continental Resources Inc.,NYE.ID
+SM,SM Energy Co.,NYE.ID
+OGE,OGE Energy Corp.,NYE.ID
+SUG,Southern Union Co.,NYE.ID
+RDC,Rowan Cos. Inc.,NYE.ID
+NFX,Newfield Exploration Co.,NYE.ID
+CIE,Cobalt International Energy Inc.,NYE.ID
+SPN,Superior Energy Services Inc.,NYE.ID
+CGV,CGG Veritas,NYE.ID
+DO,Diamond Offshore Drilling Inc.,NYE.ID
+OIS,Oil States International Inc.,NYE.ID
+SUN,Sunoco Inc.,NYE.ID
+DRC,Dresser-Rand Group Inc.,NYE.ID
+EGN,Energen Corp.,NYE.ID
+TSO,Tesoro Corp.,NYE.ID
+KMI,Kinder Morgan Inc.,NYE.ID
+WPX,WPX Energy,NYE.ID
+UPL,Ultra Petroleum Corp.,NYE.ID
+SD,SandRidge Energy Inc.,NYE.ID
+PDS,Precision Drilling Corp.,NYE.ID
+MDR,McDermott International Inc.,NYE.ID
+PVX,Provident Energy Ltd.,NYE.ID
+TDW,Tidewater Inc.,NYE.ID
+DRQ,Dril-Quip Inc.,NYE.ID
+BRY,Berry Petroleum Co. Cl A,NYE.ID
+KEG,Key Energy Services Inc.,NYE.ID
+KOG,Kodiak Oil & Gas Corp.,NYE.ID
+ATW,Atwood Oceanics Inc.,NYE.ID
+CVI,CVR Energy Inc.,NYE.ID
+OAS,Oasis Petroleum Inc.,NYE.ID
+UNT,Unit Corp.,NYE.ID
+CKH,SEACOR Holding Inc.,NYE.ID
+YPF,YPF S.A.,NYE.ID
+HLX,Helix Energy Solutions Group Inc.,NYE.ID
+CRR,CARBO Ceramics Inc.,NYE.ID
+SGY,Stone Energy Corp.,NYE.ID
+BRS,Bristow Group Inc.,NYE.ID
+MMR,McMoRan Exploration Co.,NYE.ID
+FST,Forest Oil Corp.,NYE.ID
+KOS,Kosmos Energy Ltd.,NYE.ID
+TRGP,Targa Resources Corp.,NYE.ID
+GLF,Gulfmark Offshore Inc. (Cl A),NYE.ID
+SFY,Swift Energy Co.,NYE.ID
+HOS,Hornbeck Offshore Services Inc.,NYE.ID
+BBG,Bill Barrett Corp.,NYE.ID
+XCO,EXCO Resources Inc.,NYE.ID
+WNR,Western Refining Inc.,NYE.ID
+SEMG,Semgroup Corp. Cl A,NYE.ID
+WTI,W&T Offshore Inc.,NYE.ID
+MHR,Magnum Hunter Resources Corp.,NYE.ID
+EXH,Exterran Holdings Inc.,NYE.ID
+IO,ION Geophysical Corp.,NYE.ID
+RES,RPC Inc.,NYE.ID
+TTI,Tetra Technologies Inc.,NYE.ID
+PKD,Parker Drilling Co.,NYE.ID
+KWK,Quicksilver Resources Inc.,NYE.ID
+CRK,Comstock Resources Inc.,NYE.ID
+NR,Newpark Resources Inc.,NYE.ID
+AAV,Advantage Oil & Gas Ltd.,NYE.ID
+LPR,Lone Pine Resources Inc.,NYE.ID
+REN,Resolute Energy Corp.,NYE.ID
+BAS,Basic Energy Services Inc.,NYE.ID
+FTK,Flotek Industries Inc.,NYE.ID
+TSL,Trina Solar Ltd.,NYE.ID
+EPL,Energy Partners Ltd.,NYE.ID
+EGY,Vaalco Energy Inc.,NYE.ID
+PZE,Petrobras Argentina S.A.,NYE.ID
+LPI,Laredo Petroleum Holdings Inc.,NYE.ID
+LDK,LDK Solar Co. Ltd.,NYE.ID
+GDP,Goodrich Petroleum Corp.,NYE.ID
+END,Endeavour International Corp.,NYE.ID
+TPL,Texas Pacific Land Trust Sub Share Ctf,NYE.ID
+YGE,Yingli Green Energy Holding Co. Ltd.,NYE.ID
+STP,Suntech Power Holdings Co. Ltd.,NYE.ID
+PQ,PetroQuest Energy Inc.,NYE.ID
+BPZ,BPZ Resources Inc.,NYE.ID
+STRI,STR Holdings Inc.,NYE.ID
+DVR,Cal Dive International Inc.,NYE.ID
+VQ,Venoco Inc.,NYE.ID
+CPE,Callon Petroleum Co.,NYE.ID
+TNK,Teekay Tankers Ltd.,NYE.ID
+CJES,C&J Energy Services Inc.,NYE.ID
+GGS,Global Geophysical Services Inc.,NYE.ID
+PHX,Panhandle Oil & Gas Inc.,NYE.ID
+HNR,Harvest Natural Resources Inc.,NYE.ID
+REX,Rex American Resources Corp.,NYE.ID
+SN,Sanchez Energy Corp.,NYE.ID
+WG,Willbros Group Inc.,NYE.ID
+PVA,Penn Virginia Corp.,NYE.ID
+DK,Delek US Holdings Inc.,NYE.ID
+TGS,Transportadora de Gas del Sur S.A.,NYE.ID
+BCEI,Bonanza Creek Energy Inc.,NYE.ID
+SOL,ReneSola Ltd.,NYE.ID
+NGS,Natural Gas Services Group Inc.,NYE.ID
+HDY,Hyperdynamics Corp.,NYE.ID
+MY,China Ming Yang Wind Power Group Ltd.,NYE.ID
+MTDR,Matador Resources Co.,NYE.ID
+MILL,Miller Energy Resources Inc.,NYE.ID
+EQU,Equal Energy Ltd.,NYE.ID
+GMXR,GMX Resources Inc.,NYE.ID
+ALJ,Alon USA Energy Inc.,NYE.ID
+JKS,JinkoSolar Holding Co. Ltd.,NYE.ID
+PACD,Pacific Drilling S.A.,NYE.ID
+GU,Gushan Environmental Energy Ltd.,NYE.ID
+WH,WSP Holdings Ltd.,NYE.ID

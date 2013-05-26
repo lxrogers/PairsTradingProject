@@ -31,7 +31,7 @@
 		
 		var ratiodata = new Array(<%
 				
-				double[] ratios = MStockPair.getHistoricalRatio(t1, t2, re);
+				double[] ratios = MStockPair.getHistoricalRatio(t1, t2, re, rDate);
 				for (int i = 0; i < ratios.length - 1; i++ ) {
 					out.print(ratios[i] + ",");
 				}

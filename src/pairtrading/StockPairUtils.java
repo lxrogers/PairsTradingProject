@@ -8,10 +8,10 @@ import org.rosuda.JRI.Rengine;
 import database.DBConnection;
 import database.DatabaseUtils;
 public class StockPairUtils {
-	public static ArrayList<MStockPair> getStockPairs(DBConnection db, String ticker, String teamID, String pvaluecolumn) {
+	public static ArrayList<MStockPair> getStockPairs(DBConnection db, String composite, String date, int sort, double s, double c) {
 		ArrayList<MStockPair> pairs = new ArrayList<MStockPair>();
-		
-		String query = list_pairs_query(ticker, teamID, pvaluecolumn);
+		String query = sort_pairs_query(composite, date, sort, s, c);
+		System.out.println("sort: " + query);
 		ResultSet r = DatabaseUtils.getResultSetFromDatabase(db, query);
 		try {
 			r.beforeFirst();
@@ -24,34 +24,52 @@ public class StockPairUtils {
 		}
 		return pairs;
 	}
-	public static void batchPValues(DBConnection db, Rengine re) {
-		for (String col : MStockPair.PVALUE_COLUMNS) {
-			ArrayList<MStockPair> pairs = StockPairUtils.getStockPairs(db, "BTK", "", "pvalue");
-			for (MStockPair pair : pairs) {
-				double p = 0;
-				if (col.equals("pvalue")) {
-					p = pair.runDickeyFuller(re);
-				}
-				else {
-					p = pair.runDickeyFuller(re, 135 * 7 /5, col);
-				}
-				DatabaseUtils.updateDatabase(db, update_pvalue_query(pair.mStockA.getTicker(), pair.mStockB.getTicker(), col, p));
+	public static ArrayList<MStockPair> getStockPairs(DBConnection db, String composite) {
+		ArrayList<MStockPair> pairs = new ArrayList<MStockPair>();
+		String query = list_pairs_query(composite );
+		System.out.println("sort: " + query);
+		ResultSet r = DatabaseUtils.getResultSetFromDatabase(db, query);
+		try {
+			r.beforeFirst();
+			while (r.next()) {
+				pairs.add(new MStockPair(r));
 			}
 		}
-
-	}
-	public static String update_pvalue_query(String ticker1, String ticker2, String column, double p) {
-		String q = "UPDATE mstockpair SET `" + column + "` =" + p +" WHERE ticker1=\"" + ticker1 + "\" AND ticker2=\"" + ticker2 + "\";";
-		return q;
-	}
-	public static String list_pairs_query(String composite, String teamID, String sortcolumn) {
-		return "SELECT ticker1, ticker2,  pvalue, `2012-01-01`, teamID, mode " +
-				"FROM " + 
-				"(SELECT * FROM mstockpair WHERE composite =\"" +composite + "\") as pairs " +
-				"left join " +
-				"tstockpair as tsp " +
-				"on pairs.ticker1 = tsp.stockIDA AND pairs.ticker2 = tsp.stockIDB AND tsp.teamID=\"" + teamID + "\" " +
-				"ORDER BY pairs.`" + sortcolumn + "` , pairs.ticker1, pairs.ticker2 ASC;";
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pairs;
 	}
 	
+	public static void batchPValues(DBConnection db, Rengine re) {
+		//stationarity
+		
+		System.out.println("batch complete");
+	}
+
+	public static String[] update_pvalue_query(int id, String date, double stationarity, double cointegration) {
+		String[] q = new String[2];
+		q[0] = "UPDATE stationarityvalues SET `" + date + "` =" + stationarity +" WHERE mstockpairid=" + id + "; ";
+		q[1] = 	"UPDATE cointegrationvalues SET `" + date + "` =" + cointegration+" WHERE mstockpairid=" + id + ";";
+		return q;
+	}
+	public static String list_pairs_query(String composite) {
+		return "SELECT mstockpairid, ticker1, ticker2 " +
+				"FROM mstockpair " +
+				"WHERE compositeticker='" + composite + "';";
+				
+	}
+
+	public static String sort_pairs_query(String composite, String date, int sort, double s_cutoff, double c_cutoff ) {
+		String stationarity_value = "s.`" + date + "`";
+		String cointegration_value = "c.`" + date + "`";
+		String sort_value = (sort == SORT_STATIONARITY) ? stationarity_value : cointegration_value;
+		return "SELECT p.mstockpairid, p.ticker1, p.ticker2," + stationarity_value + "," + cointegration_value + 
+				" FROM pairstradingdb.mstockpair as p" + 
+				" join stationarityvalues as s on p.mstockpairid = s.mstockpairid" +
+				" join cointegrationvalues as c on p.mstockpairid = c.mstockpairid" +
+				" WHERE  compositeticker=\"" +composite +"\" AND " + stationarity_value + " <= " + s_cutoff + " AND " + cointegration_value + " <= " + c_cutoff + " ORDER BY " + sort_value +" ASC;"; 
+	}
+	public static final int SORT_STATIONARITY = 0;
+	public static final int SORT_COINTEGRATION = 1;
 }

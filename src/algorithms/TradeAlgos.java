@@ -9,17 +9,17 @@
 package algorithms;
 
 /* Imports */
-import java.util.Calendar;
-
 import org.rosuda.JRI.Rengine;
 
+import pairtrading.MStockPair;
+import pairtrading.Trade;
 import pairtrading.TradePair;
+import simulation.Simulation;
+import simulation.SimulationStockPair;
+import simulation.SimulationTradePair;
 
 public class TradeAlgos {
-	
-	static TradeOrder shortA = new TradeOrder("none", "none", 0.0, 0);
-	static TradeOrder longA = new TradeOrder("none", "none", 0.0, 0);
-	
+	public static final int TOTAL_INVESTMENT_EACH = 10000;
 	/**
 	 * 
 	 * @param ticker1 first stock
@@ -27,63 +27,40 @@ public class TradeAlgos {
 	 * @param re instance of REngine. Must have libraries loaded
 	 * @return the trade if one was determined, null if no trade
 	 */
-	public static TradePair evaluateAndInitiateTrades(String ticker1, String ticker2, Calendar day,  Rengine re) {
-		
+	public static SimulationTradePair evaluateAndInitiateTrades(Simulation s, SimulationStockPair pair,  Rengine re, String date) {
+		SimulationTradePair tradepair = null;
 		// Calculate ratios and standard deviation.
-		double historicalRatio = RCalls.getRatio(re); // Call R.
-		double historicalStdDev = RCalls.getStdDev(re); // Call R.
-		double currentRatio = RCalls.getCurrentRatio(re); // Call R.
+		double historicalRatio = MStockPair.getHistorialRatioAvg(pair.getTicker1(), pair.getTicker2(), re, date); 
+		double historicalStdDev = RUtils.getStdDev(re, date); 
+		double currentRatio = MStockPair.getCurrentRatio(pair.getTicker1(), pair.getTicker2(), re, date); 
 		double absoluteRatioDifference = Math.abs(historicalRatio - currentRatio);
 		
 		// Running the algorithm if we're a standard deviation diverged. We've also added safeguards.
 		if(absoluteRatioDifference > historicalStdDev && absoluteRatioDifference <= 3*historicalStdDev) {
 			
-			// If we want to short stock A, because A is over-performing relative to B.
+			//double currentOverHistRatio = currentRatio / historicalRatio; -- what is this and why did you use it
+			double oldPercentage = 	pair.getPosition(pair.getTicker1()) / TOTAL_INVESTMENT_EACH;
+			double newPercentage = currentRatio / (historicalStdDev);
+			double tradeAmount = (oldPercentage - newPercentage) * TOTAL_INVESTMENT_EACH;
+			
+			// SHORT A, LONG B
 			if(currentRatio > historicalRatio) {
-				// Get some of the data we need for the following process.
-				double currentOverHistRatio = currentRatio / historicalRatio;
-				double oldPercentage = shortA.percentage;	
-				// Sets up longAShortB if it's not already there.				
-				if(shortA.ticker.equals("none")) {
-					shortA.ticker = ticker1;
-					shortA.aTradeType = "short";
-					shortA.percentage = 10.0 * currentOverHistRatio;
-					shortA.OUValue = RCalls.calculateOU(re, ticker1);
-				} else {
-					// If we're not investing more, just leave this function.
-					if(10.0*currentOverHistRatio <= oldPercentage) return null;
-					// Set the new percentage if it is more.
-					shortA.percentage = 10.0*currentOverHistRatio;
-				}	  			
-				// Make the trades, investing the same amount in each stock!
-				executeAndRecordTrade(ticker1, "short", shortA.percentage - oldPercentage);
-				executeAndRecordTrade(ticker2, "long", shortA.percentage - oldPercentage);				
+				Trade shortTrade = new Trade(pair.getTicker1(), Trade.TradeType.SHORT, tradeAmount, 0.0);
+				Trade longTrade = new Trade(pair.getTicker2(), Trade.TradeType.LONG, tradeAmount, 0.0);	
+				tradepair = new SimulationTradePair(s,shortTrade, longTrade, DataProcessing.getCalendar(date));
+						
 			}
 
-			// If we want to long stock A, because A is under-performing relative to B.
+			// LONG A, SHORT B
 			if(currentRatio < historicalRatio) {
-				// Get some of the data we need for the following process.
-				double currentOverHistRatio = currentRatio / historicalRatio;
-				double oldPercentage = longA.percentage;
-				// Sets up longA if it's not already there.	
-				if(longA.ticker.equals("none")) {
-					longA.ticker = ticker2;
-					longA.aTradeType = "long";
-					longA.percentage = 10.0 * currentOverHistRatio;
-					longA.OUValue = RCalls.calculateOU(re, ticker2);
-				} else {
-					// If we're not investing more, just leave this function.
-					if(10.0*currentOverHistRatio <= oldPercentage) return null;
-					// Set the new percentage if it is more.
-					longA.percentage = 10.0*currentOverHistRatio;
-				}
-				// Make the trades, investing the same amount in each stock!
-				executeAndRecordTrade(ticker1, "long", longA.percentage - oldPercentage);
-				executeAndRecordTrade(ticker2, "short", longA.percentage - oldPercentage);		
+				//Calendar c = calculate OUEndDate
+				Trade longTrade = new Trade(pair.getTicker1(), Trade.TradeType.LONG, tradeAmount, 0.0);	
+				Trade shortTrade = new Trade(pair.getTicker2(), Trade.TradeType.SHORT, tradeAmount, 0.0);
+				tradepair = new SimulationTradePair(s,longTrade, shortTrade, DataProcessing.getCalendar(date));
 			}
 			
 		}	
-		return null;
+		return tradepair;
 		
 	}
 	

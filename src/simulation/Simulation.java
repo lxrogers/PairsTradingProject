@@ -9,6 +9,7 @@ import org.rosuda.JRI.Rengine;
 
 import pairtrading.MStockPair;
 import algorithms.DataProcessing;
+import algorithms.TradeAlgos;
 
 public class Simulation {
 	SimulationStockPair mSimulationStockPair;
@@ -55,11 +56,25 @@ public class Simulation {
 		}
 	}
 	public void doDay(Calendar day) {
-		System.out.println("Day: " + DataProcessing.getDateRString(day));
+		//System.out.println("Day: " + DataProcessing.getDateRString(day));
+		updateTrades(day);
+		addTrade(day);
 	}
-	public void updateTrades() {
-		for (SimulationTradePair t : mTrades) {
-			t.doDay();
+	public void addTrade(Calendar day) {
+		SimulationTradePair tp = TradeAlgos.evaluateAndInitiateTrades(this, mSimulationStockPair, re, DataProcessing.getDateRString(day));
+		if (tp == null) {
+			//System.out.println("no trade");
+		}
+		else {
+			System.out.println(DataProcessing.getDateRString(day) + "open trade");
+			System.out.println("ending on:" + DataProcessing.getDateRString(tp.getOUEndDate()));
+			mTrades.add(tp);
+		}
+	}
+	public void updateTrades(Calendar day) {
+		for (int i = 0; i < mTrades.size(); i++) {
+			SimulationTradePair t = mTrades.get(i);
+			t.doDay(day);
 		}
 	}
 }

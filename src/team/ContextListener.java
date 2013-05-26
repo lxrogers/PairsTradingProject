@@ -1,5 +1,7 @@
 package team;
 
+import java.util.ArrayList;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -7,6 +9,10 @@ import javax.servlet.annotation.WebListener;
 
 import org.rosuda.JRI.Rengine;
 
+import pairtrading.StockPairUtils;
+
+import simulation.SimulationStrategy;
+import algorithms.RUtils;
 import database.DBConnection;
 
 /**
@@ -29,15 +35,8 @@ public class ContextListener implements ServletContextListener {
         DBConnection db = new DBConnection();
         context.setAttribute("database", db);
         
-        Rengine re=new Rengine (new String [] {"--vanilla"}, false, null);
-        if (!re.waitForR())
-        {
-            System.out.println ("Cannot load R");
-        }
-        System.out.println("2");
-        re.eval("library(quantmod)");
-        re.eval("library(tseries)");
-        context.setAttribute("rengine", re);
+       Rengine re = RUtils.getInitializedInstance();
+       context.setAttribute("rengine", re);
     }
 
 	/**

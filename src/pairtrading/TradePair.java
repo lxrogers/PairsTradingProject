@@ -25,6 +25,9 @@ public class TradePair {
 		end.add(Calendar.DAY_OF_YEAR,  5);
 		return end;
 	}
+	public Calendar getOUEndDate() {
+		return OUEndDate;
+	}
 	private double calculateProfit(Calendar day) {
 		return 0;
 	}

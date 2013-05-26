@@ -50,7 +50,7 @@ public class FindStocksServlet extends HttpServlet {
 		else if (a.equals("Test Permutations")) {
 			double pthreshold = Double.parseDouble(request.getParameter("pvalueindex"));
 			String composite_ticker = request.getParameter("composite");
-			pairs = StockPairUtils.getStockPairs(db, composite_ticker, request.getSession().getAttribute("teamID").toString(), pvalueindex);
+			pairs = StockPairUtils.getStockPairs(db, composite_ticker, pvalueindex, 0, 1, 1);
 		}
 		request.setAttribute("results", pairs);
 		request.setAttribute("pvalueindex", i);
